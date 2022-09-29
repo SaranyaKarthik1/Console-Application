@@ -1,0 +1,127 @@
+package Assignments;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import Assignments.HotelProcessMethod.Room;
+
+public class HotelRoomBooking {
+
+	private static boolean MainMenu = true;
+	private static boolean SubMenu = true;
+
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+		HotelRoomBooking object = new HotelRoomBooking();
+		object.startmethod();
+	}
+
+	void startmethod() {
+		Scanner input = new Scanner(System.in);
+		HotelProcessMethod process = new HotelProcessMethod();
+
+		Room[] myHotel = new Room[10];
+		myHotel[0] = process.new Room();
+		myHotel[1] = process.new Room();
+		myHotel[2] = process.new Room();
+		myHotel[3] = process.new Room();
+		myHotel[4] = process.new Room();
+		myHotel[5] = process.new Room();
+		myHotel[6] = process.new Room();
+		myHotel[7] = process.new Room();
+		myHotel[8] = process.new Room();
+		myHotel[9] = process.new Room();
+		int roomNum = 0;
+		process.initialise(myHotel);
+		while (MainMenu) {
+			while (SubMenu) {
+
+				System.out.println("Hello and Welcome to our Hotel Lals&sals!\n Enjoy and have a comfort zone!.");
+
+				System.out.println("Please select one of the options.");
+				System.out.println("1: Book A New Room.");
+
+				System.out.println("2: Display Empty Rooms.");
+
+				System.out.println("3: View all Rooms.");
+
+				System.out.println("5: Find room from customer name.");
+				System.out.println(
+						"--------------------------------------------");
+
+				System.out.println("V: View rooms Ordered alphabetically by name.");
+				System.out.println(
+						"-------------------------------------------------------");
+
+				String Selection = input.next();
+				Selection = Selection.toUpperCase();
+				switch (Selection) {
+				case "1":
+					process.BookaRoom(myHotel, roomNum);
+					break;
+				case "2":
+					process.CheckIfEmpty(myHotel);
+					break;
+				case "3":
+					process.ViewAllRooms(myHotel);
+					break;
+				case "4":
+					process.DeleteCustomerFromRoom(myHotel, roomNum);
+					break;
+				case "5":
+					process.FindRoomFromCustomerName(myHotel);
+					break;
+
+				case "V":
+					process.ViewRoomsAlphabeticallyByName(myHotel);
+					break;
+				default:
+					System.out.println("Invalid Selection");
+					break;
+				}
+
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				System.out.println("Would you like to Select another Option\n press 1 for Yes\n press 2 for No");
+
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				if (input.nextInt() == 1) {
+					SubMenu = true;
+				} else {
+					SubMenu = false;
+				}
+			}
+			SubMenu = true;
+
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+			System.out.println("Would You Like To Continue With The Program\n press 1 for yes\n press 2 for No");
+
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+			if (input.nextInt() == 1) {
+				MainMenu = true;
+			} else {
+				System.out.println("");
+				System.exit(0);
+			}
+		}
+
+	}
+
+	/*
+	 * private static void StoreProgramDataInToFile(Room[] myHotel) throws
+	 * IOException { try (PrintWriter out = new PrintWriter(new
+	 * FileWriter("/home/unix/student12/w1387769/outputfile.txt"))) { int x; for (x
+	 * = 0; x < myHotel.length; x++) { out.println("Name and Room number is: " +
+	 * myHotel[x].getName() + "at: " + x); }
+	 * 
+	 * } System.out.println("All Room Names have been Saved."); }
+	 */
+
+}
