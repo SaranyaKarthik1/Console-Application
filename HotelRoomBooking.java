@@ -6,8 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.sql.Statement;
 
 import Assignments.HotelProcessMethod.Room;
 
@@ -18,13 +23,32 @@ public class HotelRoomBooking {
 
 	/**
 	 * @param args the command line arguments
+	 * @throws SQLException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		HotelRoomBooking object = new HotelRoomBooking();
 		object.startmethod();
+		Connection connect=DriverManager.getConnection("jdbc:mySql://localhost:3306/LalsHotel","root","sarakarp10@123");
+		Statement state1=connect.createStatement();
+		//String student="saranya";
+		
+		String query="insert into customer_details (Name,Customer_phone_number) values (\"saranya\",232323)";
+		state1.executeUpdate(query);
+		//ResultSet result=state1.executeQuery(query);
+		//System.out.println("hai");
+		//while(result.next()) {
+			//System.out.println(result.getString(1)+"\t");
+		//}
 	}
 
-	void startmethod() {
+	void startmethod() throws SQLException {
+		Connection connect=DriverManager.getConnection("jdbc:mySql://localhost:3306/LalsHotel","root","sarakarp10@123");
+		Statement state1=connect.createStatement();
+		String query="select * from customer_details";
+		ResultSet result=state1.executeQuery(query);
+		while(result.next()) {
+			System.out.println(result.getString(1)+"\t");
+		}
 		Scanner input = new Scanner(System.in);
 		HotelProcessMethod process = new HotelProcessMethod();
 
@@ -53,13 +77,11 @@ public class HotelRoomBooking {
 
 				System.out.println("3: View all Rooms.");
 
-				System.out.println("5: Find room from customer name.");
-				System.out.println(
-						"--------------------------------------------");
+				System.out.println("4: Find room from customer name.");
+				System.out.println("--------------------------------------------");
 
-				System.out.println("V: View rooms Ordered alphabetically by name.");
-				System.out.println(
-						"-------------------------------------------------------");
+				//System.out.println("V: View rooms Ordered alphabetically by name.");
+				//System.out.println("-------------------------------------------------------");
 
 				String Selection = input.next();
 				Selection = Selection.toUpperCase();
@@ -73,16 +95,16 @@ public class HotelRoomBooking {
 				case "3":
 					process.ViewAllRooms(myHotel);
 					break;
-				case "4":
+				case "5":
 					process.DeleteCustomerFromRoom(myHotel, roomNum);
 					break;
-				case "5":
+				case "4":
 					process.FindRoomFromCustomerName(myHotel);
 					break;
 
-				case "V":
-					process.ViewRoomsAlphabeticallyByName(myHotel);
-					break;
+				//case "V":
+					//process.ViewRoomsAlphabeticallyByName(myHotel);
+					//break;
 				default:
 					System.out.println("Invalid Selection");
 					break;
@@ -91,7 +113,7 @@ public class HotelRoomBooking {
 				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 				System.out.println("Would you like to Select another Option\n press 1 for Yes\n press 2 for No");
 
-				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				//System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 				if (input.nextInt() == 1) {
 					SubMenu = true;
 				} else {
@@ -100,7 +122,7 @@ public class HotelRoomBooking {
 			}
 			SubMenu = true;
 
-			System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+			//System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 			System.out.println("Would You Like To Continue With The Program\n press 1 for yes\n press 2 for No");
 
 			System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
