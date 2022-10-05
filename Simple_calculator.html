@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+
+        function clr(){
+        document.getElementById("result").value=""
+        }
+        function compute(){
+        let number_one=document.getElementById("result").value;
+        let return_result=eval(number_one);
+        document.getElementById("result").value=return_result;
+
+
+        }
+        function view(num){
+        document.getElementById("result").value+=num
+
+        }
+    </script>
+    <meta charset="UTF-8">
+    <title>My Simple Calculator</title>
+    <style>
+        input[type="button"]{
+        background-color:yellow;
+        color:black;
+        overflow:hidden;
+        border:solid black 3px;
+        width:100%;
+        }
+input[type="text"]{
+background-color:white;
+border:solid black 1px;
+
+
+}
+    </style>
+</head>
+<body>
+<center> <h1>Simple Calculator using JavaScript</h1>
+    <table border="1">
+        <tr>
+            <td colspan="3"> <input type="text" id="result"/></td>
+            <td><input type="button" value="C" onclick="clr()"/></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="view('1')"/></td>
+            <td><input type="button" value="2" onclick="view('2')"/></td>
+            <td><input type="button" value="3" onclick="view('3')"/></td>
+            <td><input type="button" value="/" onclick="view('/')"/></td>
+        </tr>
+        <tr>
+       <td> <input type="button" value="4" onclick="view('4')"/></td>
+        <td> <input type="button" value="5" onclick="view('5')"/></td>
+        <td> <input type="button" value="6" onclick="view('6')"/></td>
+        <td> <input type="button" value="+" onclick="view('+')"/></td>
+        </tr>
+        <tr>
+            <td> <input type="button" value="7" onclick="view('7')"/></td>
+            <td> <input type="button" value="8" onclick="view('8')"/></td>
+            <td> <input type="button" value="9" onclick="view('9')"/></td>
+            <td> <input type="button" value="-" onclick="view('-')"/></td>
+        </tr>
+
+        <tr>
+            <td> <input type="button" value="." onclick="view('.')"/></td>
+            <td> <input type="button" value="0" onclick="view('0')"/></td>
+            <td> <input type="button" value="=" onclick="compute()"/></td>
+            <td> <input type="button" value="*" onclick="view('*')"/></td>
+        </tr>
+
+
+    </table>
+</center>
+</body>
+</html>
